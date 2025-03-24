@@ -1,4 +1,4 @@
-import { Request, Response } from "express";
+import { query, Request, Response } from "express";
 import { RolesRepository } from "repositories/RolesRepository";
 import { RolesService } from "services/RolesService";
 import { IRolesRepository, Roles } from "types/RolesTypes";
