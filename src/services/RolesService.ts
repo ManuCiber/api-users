@@ -12,7 +12,7 @@ export class RolesService implements IRolesService{
         return this.RolesRepository.create(Roles);
     }
 
-    async findRoles(query:Query): Promise<Roles[]> {
+    async findRoles(query?:Query): Promise<Roles[]> {
         return this.RolesRepository.find();
     }
     
