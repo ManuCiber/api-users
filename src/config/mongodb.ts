@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 import dotenv from "dotenv";
 
 dotenv.config()
-const mongodbURL = process.env.MONGODB_URL_STRING as string;
+const mongodbURL = process.env.MONGODB_URL as string;
 
 export default ( async ()=>{
     try{
