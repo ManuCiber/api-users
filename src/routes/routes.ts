@@ -13,13 +13,14 @@ export default () => {
     
     /*Login Usuarios*/
     router.post("/login", loginUser);
+    
     /*Rutas Usuarios*/
     router.get("/mundo", (req, res)=>{
         res.send("Hola mundo. La API está funcionando correctamente");
     });
     
     /*Obtener Usuarios*/
-    router.get("/users", verifyToken, getUsers);
+    router.get("/users", getUsers);
 
     /*Obtener Usuario*/
     router.get("/users/:id", getUser);

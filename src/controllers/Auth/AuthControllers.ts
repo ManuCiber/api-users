@@ -4,7 +4,10 @@ import { IUserRepository, User } from "types/UsersTypes";
 import jwt from "jsonwebtoken";
 import { Request, Response } from "express";
 
-
+interface LoginData {
+  email: string;
+  password: string;
+}
 
 const userRepository: IUserRepository = new UserRepository();
 const userService: UserService = new UserService(userRepository);
@@ -12,7 +15,7 @@ const userService: UserService = new UserService(userRepository);
 export const registerUser = async (req: Request, res:Response) => {
     try {
       
-      const { email }: User = req.body;
+      const { email }: LoginData = req.body;
       const userExists = await userService.findUsersByEmail(email);
       
       if (!userExists) {
@@ -27,30 +30,26 @@ export const registerUser = async (req: Request, res:Response) => {
     }
   };
 
-export const loginUser = async (req: Request, res: Response) => {
-  const jwtSecret = process.env.JWT_SECRET as string;
-
+export const loginUser = async (req: Request, res: Response) => {  
     try {
-      const { email, password }: User = req.body;
+      const {email, password} : LoginData = req.body;
       const user = await userService.findUsersByEmail(email);
+      const jwtSecret = process.env.JWT_SECRET as string;
       
-      if(!user) return res.status(400).json({message: "Usuario o Contraseña Inválida"});
-
-      const comparePass = await user.comparepassword(password);
-      if(!comparePass) return res.status(400).json({message: "Usuario o Contraseña Inválida"})
+      if(!user || !(await user.comparepassword(password))){
+        res.status(401).json({message:"Usuario o contraseña inválido"});
+      }
 
       const token = jwt.sign({
-        id: user._id,
-        email: user.email,
-        username: user.username
-      },jwtSecret,{expiresIn:"1h"});
+        id: user?._id,
+        email: user?.email,
+        usuario: user?.username
+      },jwtSecret, {expiresIn: "1h"});
 
-      console.log(token);
-
-      res.status(200).json({user});
+      res.status(200).json({user, token});
 
     } catch (error) {
-      console.log("error :>> ", error);
-      res.status(500).json(error);
+      res.status(500).json({message: "Internal Error server"});
+      console.log(error);
     }
   };
