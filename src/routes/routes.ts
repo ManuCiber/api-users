@@ -26,7 +26,7 @@ export default () => {
     router.get("/users/:id", getUser);
 
     /*Crear Usuario*/
-    router.post("/users", CreateUser);
+    router.post("/users-add", CreateUser);
 
     /*Actualizar Usuario*/
     router.put("/users/:id", UpdateUser);
@@ -42,7 +42,7 @@ export default () => {
     router.get("/rol/:id", getRol);
     
     /*Crear Rol*/
-    router.post("/rol", CreateRoles);
+    router.post("/rol-add", CreateRoles);
     
     /*Actualizar Rol*/
     router.put("/rol/:id",UpdateRoles);

@@ -10,7 +10,7 @@ export class RolesRepository implements IRolesRepository{
         return await newRoles.save();
     }
 
-    async find(query:Query): Promise<Roles[]> {
+    async find(query?:Query): Promise<Roles[]> {
         const Roless = RolesModel.find();
         return await Roless.find(query || {}).exec();
     }

@@ -14,6 +14,7 @@ export const CheckRoles = async (req: Request, res: Response, next: NextFunction
     console.log("req.body: ->",role);
 
     try {
+        
         // Si viene el rol, revisar en la base de datos que ese rol exista
 
         const findRoles = await rolesService.findRoles({name: {$in:role}});

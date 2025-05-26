@@ -7,4 +7,4 @@ const RolesSchema: Schema = new mongoose.Schema<Roles>({
 },{timestamps: true, versionKey: false});
 
 
-export const RolesModel = mongoose.model<Roles>("RolesModel",RolesSchema);
+export const RolesModel = mongoose.model<Roles>("Roles",RolesSchema);
