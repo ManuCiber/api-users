@@ -3,6 +3,7 @@ import { CreateUser, DeleteUser, getUser, getUsers, UpdateUser } from "@/control
 import { CreateRoles, DeleteRoles, getRol, getRoles, UpdateRoles } from "@/controllers/RolesControllers";
 import { verifyToken } from "middlewares/Auth";
 import { loginUser, registerUser } from "@/controllersAuth/AuthControllers";
+import { createPosts, deletePosts, findPosts, findPostsById, updatePosts } from "@/controllersPostControllers";
 
 const router = Router();
 
@@ -49,6 +50,16 @@ export default () => {
     
     /*Borrar un Rol*/
     router.delete("/rol/:id", DeleteRoles);
+
+
+    /**
+     * Rutas para los posts
+    */
+    router.get("/posts", findPosts);
+    router.get("/posts/:id", findPostsById);
+    router.post("/posts",  createPosts);
+    router.put("/posts/:id", updatePosts);
+    router.delete("/posts/:id", deletePosts);
 
     return router;
 }
