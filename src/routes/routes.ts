@@ -4,13 +4,14 @@ import { CreateRoles, DeleteRoles, getRol, getRoles, UpdateRoles } from "@/contr
 import { verifyToken } from "middlewares/Auth";
 import { loginUser, registerUser } from "@/controllersAuth/AuthControllers";
 import { createPosts, deletePosts, findPosts, findPostsById, updatePosts } from "@/controllersPostControllers";
+import { CheckRoles } from "middlewares/Roles";
 
 const router = Router();
 
 export default () => {
 
     /*Registro Usuarios*/
-    router.post("/register", registerUser);
+    router.post("/register", CheckRoles, registerUser);
     
     /*Login Usuarios*/
     router.post("/login", loginUser);
