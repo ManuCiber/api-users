@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 import routes from "./routes/routes";
 import "./config/mongodb";
 
+
 dotenv.config();
 
 const PORT = process.env.PORT || 5000;
